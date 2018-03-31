@@ -1,0 +1,19 @@
+{
+  "name": "hn-api",
+  "version": "0.1.0",
+  "description": "HackerNews GraphQL API",
+  "main": "index.js",
+  "author": "Tigran Petrossian",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon ./server.js --exec babel-node"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.0.0-beta.42",
+    "@babel/core": "^7.0.0-beta.42",
+    "@babel/node": "^7.0.0-beta.42",
+    "@babel/preset-env": "^7.0.0-beta.42",
+    "@babel/preset-stage-2": "^7.0.0-beta.42",
+    "nodemon": "^1.17.2"
+  }
+}
