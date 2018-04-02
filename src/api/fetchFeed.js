@@ -1,5 +1,7 @@
 import fetch from './fetch';
 import { ENTRIES_PER_PAGE } from '../constants';
+import fetchPosts from './fetchPosts';
+import fetchFeedIDs from './fetchFeedIDs';
 
 /**
  * Fetch a feed of given name and page: top 1st page, news 2nd page, etc.

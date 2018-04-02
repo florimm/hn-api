@@ -1,4 +1,7 @@
 import fetch from './fetch';
+import fetchPost from './fetchPost'
+
+
 /**
  * Fetch a list of posts
  *
