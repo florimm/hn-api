@@ -21,8 +21,8 @@ const typeDefs = `
     text: String
     score: Int
     time: Int!
-    author: User!
-    pollOptions: [PollOption]
+    author: String!
+    poll: Poll
     commentCount: Int
     comments: [Comment]
   }
@@ -37,15 +37,22 @@ const typeDefs = `
   }
   
   type User {
-    id: String
+    username: String
     createdAt: Int!
     karma: Int
     about: String
     #submissions: [?]
   }
   
+  type Poll {
+    totalVotes: Int!
+    options: [PollOption] #!
+  }
+  
   type PollOption {
-    id: ID!
+    text: String!
+    voteCount: Int!
+    Percentage: Float!
   }
 `;
 

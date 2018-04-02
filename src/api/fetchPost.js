@@ -20,8 +20,8 @@ export function fetchPost(id) {
       text: post.text || null,
       score: post.score || null,
       time: post.time,
-      authorID: post.author,
-      pollOptionIDs: post.pollOptions || null,
+      author: post.by,
+      pollOptionIDs: post.parts || null,
       commentCount: post.descendants || null,
       commentIDs: post.kids || null,
     }))
