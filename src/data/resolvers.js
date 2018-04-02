@@ -1,19 +1,29 @@
-import { fetchPost, fetchFeed } from '../api/';
+import { fetchFeed, fetchPost, fetchUser, fetchComment, fetchComments, fetchPollOptions } from '../api/';
 
 const resolvers = {
   Query: {
-    post(obj, args, context) {
+    feed(_, args) {
+      return fetchFeed(args.name, args.page, args.limit)
+    },
+    
+    post(_, args) {
       return fetchPost(args.id);
     },
     
-    feed(obj, args, context) {
-      return fetchFeed(args.name, args.page, args.limit)
+    comment(_, args) {
+      return fetchComment(args.id);
+    },
+    
+    user(_, args) {
+      return fetchUser(args.id);
     }
   },
   
-  Post: {},
+  Post: {
+    comments(parentPost) {
+      return fetchComments(parentPost.commentIDs);
+    },
   
-  Comment: {}
   Comment: {
     comments(parentComment) {
       return parentComment.commentIDs && fetchComments(parentComment.commentIDs);
