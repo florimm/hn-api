@@ -19,4 +19,4 @@ app.listen(4000, () => {
   console.log('Go to http://localhost:4000/graphiql to run queries!');
 });
 
-
+// TODO: Need authentication
