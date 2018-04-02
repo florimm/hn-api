@@ -7,9 +7,25 @@ import resolvers from './resolvers';
 // language=GraphQL Schema
 const typeDefs = `
   type Query {
-    feed(name: String!, page: Int = 1, limit: Int = 30): [Post]!
+    # Single feed of posts of given type (top, new, etc.). Limited to 30 posts per page by default.
+    feed(
+      # Name of the feed (top, new, show, ask, etc.)
+      name: String!,
+      
+      # Current page of the feed to display
+      page: Int = 1,
+      
+      # Amount of posts per page
+      limit: Int = 30
+    ): [Post]!
+    
+    # Single post
     post(id: ID!): Post
+    
+    # Single comment
     comment(id: ID!): Comment
+    
+    # Single user
     user(id: String!): User
   }
   
