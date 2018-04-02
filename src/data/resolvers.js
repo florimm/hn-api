@@ -14,6 +14,11 @@ const resolvers = {
   Post: {},
   
   Comment: {}
+  Comment: {
+    comments(parentComment) {
+      return parentComment.commentIDs && fetchComments(parentComment.commentIDs);
+    }
+  },
 };
 
 export default resolvers;

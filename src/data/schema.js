@@ -32,8 +32,7 @@ const typeDefs = `
     type: String
     text: String!
     time: Int!
-    kids: [Int]!
-    author: User!
+    author: String!
     comments: [Comment]
   }
   
