@@ -30,10 +30,11 @@ const typeDefs = `
   type Comment {
     id: ID!
     type: String
-    text: String!
+    text: String
     time: Int!
-    author: String!
+    author: String
     comments: [Comment]
+    deleted: Boolean
   }
   
   type User {
