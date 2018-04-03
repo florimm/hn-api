@@ -30,9 +30,10 @@ API.child("updates/items")
     snapshot.val().forEach(id => {
       if (cache && cache.has(`item/${id}`)) {
         console.log(`Item with id ${id} updated, removing from cache`);
+        // TODO: Refetch?
         cache.del(`item/${id}`);
       }
     });
   });
 
-// TOOD: Need to invalidate users same way.
+// TODO: Need to invalidate users same way.

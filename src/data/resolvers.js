@@ -28,20 +28,23 @@ const resolvers = {
       return fetchComments(parentPost.commentIDs);
     },
     
-    poll(parentPost) {
+    async poll(parentPost) {
       if (!parentPost.pollOptionIDs || !parentPost.pollOptionIDs.length > 0) {
         return null;
       }
       
-      return fetchPollOptions(parentPost.pollOptionIDs)
-      
-        // Construct the Poll object by supplying calculated total votes and an array of options
-        .then(options => ({
-          totalVotes: options.reduce((acc, item) => {
-            return acc + item.voteCount;
-          }, 0),
-          options
-        }));
+      const options = await fetchPollOptions(parentPost.pollOptionIDs);
+      const totalVotes = options.reduce((acc, item) => acc + item.voteCount, 0);
+  
+      // Construct an object according to Poll Object in schema, by addint total
+      // votes, and injecting percentage into every option item.
+      return {
+        totalVotes,
+        options: options.map(option => ({
+          ...option,
+          percentage: Math.round((option.voteCount / totalVotes) * 10000) / 100,
+        }))
+      }
     }
   },
   

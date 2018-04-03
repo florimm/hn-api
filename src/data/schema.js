@@ -74,7 +74,7 @@ const typeDefs = `
   type PollOption {
     text: String!
     voteCount: Int!
-    Percentage: Float!
+    percentage: Float!
   }
 `;
 
