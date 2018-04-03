@@ -25,6 +25,7 @@ export function fetchPost(id) {
       commentCount: post.descendants || null,
       commentIDs: post.kids || null,
     }))
+    .catch(error => `Failed fetching post ${id}`)
 }
 
 export default fetchPost;
