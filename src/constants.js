@@ -5,6 +5,6 @@ export const FEED_NAMES = {
   new: 'newstories',
   show: 'showstories',
   ask: 'askstories',
-  job: 'jobstories',
+  jobs: 'jobstories',
   best: 'beststories',
 };
