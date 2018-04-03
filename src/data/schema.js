@@ -10,14 +10,14 @@ const typeDefs = `
     # Single feed of posts of given type (top, new, etc.). Limited to 30 posts per page by default.
     feed(
       # Name of the feed (top, new, show, ask, etc.)
-      name: String!,
+      feedName: String!,
       
       # Current page of the feed to display
       page: Int = 1,
       
       # Amount of posts per page
       limit: Int = 30
-    ): [Post]!
+    ): Feed!
     
     # Single post
     post(id: ID!): Post
@@ -27,6 +27,11 @@ const typeDefs = `
     
     # Single user
     user(id: String!): User
+  }
+  
+  type Feed {
+    postCount: Int!
+    posts: [Post]!
   }
   
   type Post {

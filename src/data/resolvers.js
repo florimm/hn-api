@@ -1,9 +1,13 @@
-import { fetchFeed, fetchPost, fetchUser, fetchComment, fetchComments, fetchPollOptions } from '../api/';
+import { fetchFeed, fetchPost, fetchUser, fetchComment, fetchComments, fetchPollOptions, fetchFeedIDs } from '../api/';
 
 const resolvers = {
   Query: {
     feed(_, args) {
-      return fetchFeed(args.name, args.page, args.limit)
+      return {
+        // Pass total amount of posts in each feed, so client can build pagination
+        postCount: fetchFeedIDs(args.feedName).then(ids => ids.length),
+        posts: fetchFeed(args.feedName, args.page, args.limit)
+      }
     },
     
     post(_, args) {
