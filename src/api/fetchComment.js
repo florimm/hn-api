@@ -14,7 +14,7 @@ export function fetchComment(id) {
   return fetch(`item/${id}`)
     .then(comment => {
       // Filter out dead comments or rare ones that come without text
-      if (comment.dead) {
+      if (!comment || (comment && comment.dead)) {
         return null;
       }
       

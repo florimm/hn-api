@@ -17,6 +17,7 @@ Object.keys(FEED_NAMES).forEach(feed => {
     .on('value',
       snapshot => {
         cachedFeedIDs[feed] = snapshot.val();
+        console.log(`Updated cached IDs for "${feed}"`);
       },
       error => {
         console.log(error);

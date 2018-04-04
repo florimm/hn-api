@@ -11,7 +11,7 @@ import cache from './cache';
  * */
 function fetch(path) {
   if (cache && cache.has(path)) {
-    console.log(`Fetching ${path} from cache`)
+    console.log(`Fetching ${path} from cache`);
     return Promise.resolve(cache.get(path));
   }
   
