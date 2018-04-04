@@ -46,6 +46,7 @@ const typeDefs = `
     poll: Poll
     commentCount: Int
     comments: [Comment]
+    commentIDs: [Int] # Remove
   }
 
   type Comment {
@@ -56,6 +57,7 @@ const typeDefs = `
     author: String
     comments: [Comment]
     deleted: Boolean
+    parentPostID: ID
   }
   
   type User {

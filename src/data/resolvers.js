@@ -4,7 +4,7 @@ const resolvers = {
   Query: {
     feed(_, args) {
       return {
-        // Pass total amount of posts in each feed, so client can build pagination
+        // Pass the total amount of posts in each feed, so the client can build a pagination
         postCount: fetchFeedIDs(args.feedName).then(ids => ids.length),
         posts: fetchFeed(args.feedName, args.page, args.limit)
       }
@@ -15,7 +15,7 @@ const resolvers = {
     },
     
     comment(_, args) {
-      return fetchComment(args.id);
+      return fetchComment(args.id, true);
     },
     
     user(_, args) {
