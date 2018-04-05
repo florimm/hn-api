@@ -24,8 +24,12 @@ const resolvers = {
   },
   
   Post: {
-    comments(parentPost) {
-      return fetchComments(parentPost.commentIDs);
+    comments(parentPost, args) {
+      if (!parentPost.commentIDs) {
+        return null;
+      }
+  
+      return fetchComments(parentPost.commentIDs, args.skip, args.limit);
     },
     
     async poll(parentPost) {
@@ -35,7 +39,7 @@ const resolvers = {
       
       const options = await fetchPollOptions(parentPost.pollOptionIDs);
       const totalVotes = options.reduce((acc, item) => acc + item.voteCount, 0);
-  
+      
       // Construct an object according to Poll Object in schema, by adding total
       // votes, and injecting percentage into every option item.
       return {
@@ -49,8 +53,12 @@ const resolvers = {
   },
   
   Comment: {
-    comments(parentComment) {
-      return parentComment.commentIDs && fetchComments(parentComment.commentIDs);
+    comments(parentComment, args) {
+      if (!parentComment.commentIDs) {
+        return null;
+      }
+  
+      return fetchComments(parentComment.commentIDs, args.skip, args.limit);
     }
   },
 };

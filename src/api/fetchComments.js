@@ -4,18 +4,28 @@ import fetchComment from './fetchComment';
 /**
  * Fetch a list of comments
  *
- * @param {Number} idList – array of comment IDs
+ * @param {Array} idList – array of comment IDs
+ * @param {Number} skip – Skip given number of comments from the start
+ * @param {Number} limit – Limit the amount of comments to fetch
  * @return {Promise} – A promise resolving to array of comment objects
  *
  *  */
 
-export function fetchComments(idList) {
+export function fetchComments(idList, skip, limit) {
   console.log(`Fetching comment ${idList}`);
   
-  return Promise.all(idList.map(id => fetchComment(id, false)))
+  const from = skip;
+  const upto = (limit === undefined)
+    ? undefined
+    : from + limit;
+  const filteredIDList = idList.slice(from, upto);
+  
+  return Promise.all(
+    filteredIDList.map(id => fetchComment(id, false))
+  )
     .then(comments =>
       comments.filter(comment =>
-        comment !== null || comment !== undefined)
+        comment !== null && comment !== undefined)
     )
     .catch(error => console.log(`Failed fetching ${idList}: ${error}`));
 }

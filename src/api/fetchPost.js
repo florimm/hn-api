@@ -9,6 +9,8 @@ import fetch from './fetch';
  *  */
 
 export function fetchPost(id) {
+  console.log(`Fetching post ${id}`);
+  
   return fetch(`item/${id}`)
     .then(post => {
       if (post === null) {
@@ -29,7 +31,7 @@ export function fetchPost(id) {
         commentIDs: post.kids || null,
       });
     })
-    .catch(error => `Failed fetching post ${id}`)
+    .catch(error => console.log(`Failed fetching post ${id}`))
 }
 
 export default fetchPost;

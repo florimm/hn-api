@@ -3,7 +3,7 @@ import API from './api';
 import { FEED_NAMES } from '../constants';
 
 const cache = lru({
-  max: 1000,
+  max: 1500,
   maxAge: 1000 * 60 * 15
 });
 
@@ -30,6 +30,7 @@ API.child("updates/items")
   .on('value', snapshot => {
     snapshot.val().forEach(id => {
       if (cache && cache.has(`item/${id}`)) {
+        
         console.log(`Item with id ${id} updated, removing from cache`);
         // TODO: Refetch?
         cache.del(`item/${id}`);

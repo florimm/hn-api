@@ -45,8 +45,7 @@ const typeDefs = `
     author: String!
     poll: Poll
     commentCount: Int
-    comments: [Comment]
-    commentIDs: [Int] # Remove
+    comments(skip: Int = 0, limit: Int): [Comment]
   }
 
   type Comment {
@@ -55,11 +54,10 @@ const typeDefs = `
     text: String
     time: Int!
     author: String
-    comments: [Comment]
-    commentIDs: [Int] # Remove
     deleted: Boolean
     parentPostID: ID
     parentPostTitle: String
+    comments(skip: Int = 0, limit: Int): [Comment]
   }
   
   type User {
