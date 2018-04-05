@@ -12,7 +12,7 @@ import fetchComment from './fetchComment';
 export function fetchComments(idList) {
   console.log(`Fetching comment ${idList}`);
   
-  return Promise.all(idList.map(fetchComment))
+  return Promise.all(idList.map(id => fetchComment(id, false)))
     .then(comments =>
       comments.filter(comment =>
         comment !== null || comment !== undefined)

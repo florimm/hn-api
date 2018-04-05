@@ -56,8 +56,10 @@ const typeDefs = `
     time: Int!
     author: String
     comments: [Comment]
+    commentIDs: [Int] # Remove
     deleted: Boolean
     parentPostID: ID
+    parentPostTitle: String
   }
   
   type User {

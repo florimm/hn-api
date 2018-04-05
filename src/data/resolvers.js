@@ -36,7 +36,7 @@ const resolvers = {
       const options = await fetchPollOptions(parentPost.pollOptionIDs);
       const totalVotes = options.reduce((acc, item) => acc + item.voteCount, 0);
   
-      // Construct an object according to Poll Object in schema, by addint total
+      // Construct an object according to Poll Object in schema, by adding total
       // votes, and injecting percentage into every option item.
       return {
         totalVotes,
