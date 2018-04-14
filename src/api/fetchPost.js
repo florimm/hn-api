@@ -16,7 +16,7 @@ export function fetchPost(id) {
       if (post === null) {
         return null;
       }
-      
+
       return ({
         id: post.id,
         type: post.type,

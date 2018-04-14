@@ -19,7 +19,7 @@ export function fetchComments(idList, skip, limit) {
     ? undefined
     : from + limit;
   const filteredIDList = idList.slice(from, upto);
-  
+
   return Promise.all(
     filteredIDList.map(id => fetchComment(id, false))
   )

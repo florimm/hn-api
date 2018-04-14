@@ -24,13 +24,12 @@ Object.keys(FEED_NAMES).forEach(feed => {
       })
 });
 
-
 // Invalidate updated items
 API.child("updates/items")
   .on('value', snapshot => {
     snapshot.val().forEach(id => {
       if (cache && cache.has(`item/${id}`)) {
-        
+
         console.log(`Item with id ${id} updated, removing from cache`);
         // TODO: Refetch?
         cache.del(`item/${id}`);
