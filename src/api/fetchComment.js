@@ -12,13 +12,13 @@ import API from './api';
 
 export async function fetchComment(id, withPostInfo = false) {
   const comment = await fetch(`item/${id}`);
-  
+
   if (!comment || (comment && comment.dead)) {
     return null;
   }
-  
+
   const postInfo = withPostInfo ? await getParentPostId(comment) : null;
-  
+
   return {
     id: comment.id,
     type: comment.type,
@@ -27,9 +27,10 @@ export async function fetchComment(id, withPostInfo = false) {
     author: comment.by || null,
     commentCount: comment.descendants || null,
     commentIDs: comment.kids || null,
-    deleted: comment.deleted || false,
+    parent: comment.parent || null,
     parentPostID: postInfo && postInfo.postID,
     parentPostTitle: postInfo && postInfo.postTitle,
+    deleted: comment.deleted || false,
   }
 }
 
@@ -41,18 +42,18 @@ export async function fetchComment(id, withPostInfo = false) {
 
 function getParentPostId(comment) {
   console.log('Retrieving parent post info for ', comment.id);
-  
+
   return fetch(`item/${comment.parent}`)
     .then(result => {
       if (result && result.type !== 'comment') {
         console.log('parent Post ID: ', result.id);
-        
+
         return {
           postTitle: result.title,
           postID: result.id,
         }
       }
-      
+
       return getParentPostId(result);
     });
 }

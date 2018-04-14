@@ -16,7 +16,7 @@ const typeDefs = `
       page: Int = 1,
       
       # Amount of posts per page
-      limit: Int = 30
+      limit: Int = 500 # Bring back the 30 limit
     ): Feed!
     
     # Single post
@@ -24,6 +24,9 @@ const typeDefs = `
     
     # Single comment
     comment(id: ID!): Comment
+    
+    # Multiple comments by ID
+    comments(commentIDs: [ID!], skip: Int = 0, limit: Int): [Comment] # TODO: Required!
     
     # Single user
     user(id: String!): User
@@ -45,6 +48,7 @@ const typeDefs = `
     author: String!
     poll: Poll
     commentCount: Int
+    commentIDs: [ID]
     comments(skip: Int = 0, limit: Int): [Comment]
   }
 
@@ -54,10 +58,12 @@ const typeDefs = `
     text: String
     time: Int!
     author: String
-    deleted: Boolean
+    commentIDs: [Int]
+    comments(skip: Int = 0, limit: Int): [Comment]
+    parent: ID
     parentPostID: ID
     parentPostTitle: String
-    comments(skip: Int = 0, limit: Int): [Comment]
+    deleted: Boolean
   }
   
   type User {
