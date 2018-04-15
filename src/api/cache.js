@@ -1,5 +1,6 @@
 import lru from 'lru-cache';
 import API from './api';
+import fetch from './fetch';
 import { FEED_NAMES } from '../constants';
 
 const cache = lru({
@@ -30,9 +31,9 @@ API.child("updates/items")
     snapshot.val().forEach(id => {
       if (cache && cache.has(`item/${id}`)) {
 
-        console.log(`Item with id ${id} updated, removing from cache`);
-        // TODO: Refetch?
-        cache.del(`item/${id}`);
+        fetch(`item/${id}`)
+          .then(_ => console.log(`Item with id ${id} updated, re-caching.`))
+          .catch(error => "Failed re-caching Item with id ${id}");
       }
     });
   });
