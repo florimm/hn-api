@@ -7,9 +7,23 @@ import schema from './data/schema';
 
 const app = express();
 
-app.use(cors());
+const corsOptions = {
+  // Cache OPTIONS request, so it doesn't block the main request on slow connections.
+  maxAge: 86400
+};
 
-app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }));
+app.use(cors(corsOptions));
+
+app.use(
+  '/graphql',
+  bodyParser.json(),
+  graphqlExpress({ schema })
+);
+
+app.use(
+  '/graphiql',
+  graphiqlExpress({ endpointURL: '/graphql' })
+);
 
 app.use('/graphiql', graphiqlExpress({
   endpointURL: '/graphql',
