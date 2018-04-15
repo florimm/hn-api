@@ -3,8 +3,8 @@ import API from './api';
 import { FEED_NAMES } from '../constants';
 
 const cache = lru({
-  max: 1500,
-  maxAge: 1000 * 60 * 15
+  max: 5000,
+  maxAge: 1000 * 60 * 60
 });
 
 export default cache;
