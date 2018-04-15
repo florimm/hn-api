@@ -1,4 +1,12 @@
-import { fetchFeed, fetchPost, fetchUser, fetchComment, fetchComments, fetchPollOptions, fetchFeedIDs } from '../api/';
+import {
+  fetchFeed,
+  fetchPost,
+  fetchUser,
+  fetchComment,
+  fetchComments,
+  fetchPollOptions,
+  fetchFeedIDs,
+} from '../api/';
 
 const resolvers = {
   Query: {
@@ -20,8 +28,6 @@ const resolvers = {
 
     comments(_, args) {
       return fetchComments(args.commentIDs, args.skip, args.limit);
-      //console.log(args.commentIDs);
-      //const maxComments = 10;
     },
 
     user(_, args) {
