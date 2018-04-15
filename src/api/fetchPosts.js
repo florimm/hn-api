@@ -20,4 +20,4 @@ function fetchPosts(idList) {
 
 export default fetchPosts;
 
-// TODO: fetchPosts, fetchComments, fetchPolloptions are doing the same. Refactor.
+// TODO: fetchPosts, fetchComments, fetchPolloptions are doing the same. Refactor?

@@ -20,3 +20,6 @@ app.listen(4000, () => {
 });
 
 // TODO: Need authentication
+
+// TODO:  Disable introspection – https://github.com/helfer/graphql-disable-introspection
+//        Apollo Client payloads seem to be significantly larger than GraphiQL, GZIP doesn't help.
