@@ -10,22 +10,18 @@ import cache from './cache';
  *
  * */
 function fetch(path) {
-  // return new Promise((resolve, reject) => {
-  //   API.child(path)
-  //     .on('value', (snapshot) => {
-  //       resolve(snapshot.val());
-  //     }, reject)
-  // });
-
-
   if (cache && cache.has(path)) {
     console.log(`Fetching ${path} from cache`);
     return Promise.resolve(cache.get(path));
   }
 
+  console.time(`Fetching ${path} from Firebase`);
+
   return API.child(path)
     .once('value')
     .then(snapshot => {
+      console.timeEnd(`Fetching ${path} from Firebase`);
+
       if (cache) {
         cache.set(path, snapshot.val());
       }
