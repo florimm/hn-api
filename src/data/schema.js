@@ -16,7 +16,7 @@ const typeDefs = `
       page: Int = 1,
       
       # Amount of posts per page
-      limit: Int = 500 # Bring back the 30 limit
+      limit: Int = 30
     ): Feed!
     
     # Single post
@@ -26,7 +26,7 @@ const typeDefs = `
     comment(id: ID!): Comment
     
     # Multiple comments by ID
-    comments(commentIDs: [ID!], skip: Int = 0, limit: Int): [Comment] # TODO: Required!
+    comments(commentIDs: [ID!], skip: Int = 0, limit: Int): [Comment]!
     
     # Single user
     user(id: String!): User
