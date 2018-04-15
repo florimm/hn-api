@@ -9,8 +9,8 @@ import fetch from './fetch';
  *  */
 
 export function fetchPost(id) {
-  console.log(`Fetching post ${id}`);
-  
+  //console.log(`Fetching post ${id}`);
+
   return fetch(`item/${id}`)
     .then(post => {
       if (post === null) {

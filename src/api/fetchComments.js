@@ -12,8 +12,8 @@ import fetchComment from './fetchComment';
  *  */
 
 export function fetchComments(idList, skip, limit) {
-  console.log(`Fetching comment ${idList}`);
-  
+  //console.log(`Fetching comment ${idList}`);
+
   const from = skip;
   const upto = (limit === undefined)
     ? undefined

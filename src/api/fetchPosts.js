@@ -11,8 +11,8 @@ import fetchPost from './fetchPost'
  *  */
 
 function fetchPosts(idList) {
-  console.log(`Fetching ${idList}`);
-  
+  //console.log(`Fetching ${idList}`);
+
   return Promise.all(idList.map(fetchPost))
     .then(posts => posts.filter(post => post !== null && post !== undefined))
     .catch(error => console.log(`Failed fetching ${idList}: ${error}`));

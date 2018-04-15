@@ -1,9 +1,10 @@
 import express from 'express';
 import cors from 'cors';
+import compression from 'compression';
 import bodyParser from 'body-parser';
 import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import schema from './data/schema';
-
+//import './api/analysis'
 
 const app = express();
 
@@ -25,9 +26,7 @@ app.use(
   graphiqlExpress({ endpointURL: '/graphql' })
 );
 
-app.use('/graphiql', graphiqlExpress({
-  endpointURL: '/graphql',
-}));
+app.use(compression());
 
 app.listen(4000, () => {
   console.log('Go to http://localhost:4000/graphiql to run queries!');
