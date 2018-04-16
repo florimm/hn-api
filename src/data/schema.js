@@ -29,7 +29,7 @@ const typeDefs = `
     comments(commentIDs: [ID!], skip: Int = 0, limit: Int): [Comment]!
     
     # Single user
-    user(id: String!): User
+    user(username: String!): User
   }
   
   type Feed {
@@ -71,7 +71,7 @@ const typeDefs = `
     createdAt: Int!
     karma: Int
     about: String
-    #submissions: [?]
+    submissions: [ID] #[?]
   }
   
   type Poll {

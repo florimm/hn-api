@@ -31,7 +31,7 @@ const resolvers = {
     },
 
     user(_, args) {
-      return fetchUser(args.id);
+      return fetchUser(args.username);
     }
   },
 

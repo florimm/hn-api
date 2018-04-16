@@ -10,7 +10,7 @@ const app = express();
 
 const corsOptions = {
   // Cache OPTIONS request, so it doesn't block the main request on slow connections.
-  maxAge: 86400
+  maxAge: 86400 // TODO: Doesn't seem to work. Check.
 };
 
 app.use(cors(corsOptions));

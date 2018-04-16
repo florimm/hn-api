@@ -10,7 +10,7 @@ import fetch from './fetch';
 
 export function fetchUser(id) {
   console.log(`Fetching user ${id}`);
-  
+
   return fetch(`user/${id}`)
     .then(user => ({
       username: user.id,
@@ -18,7 +18,7 @@ export function fetchUser(id) {
       createdAt: user.created,
       delay: user.delay || null,
       karma: user.karma || null,
-      submittedIDs: user.submitted || null,
+      submissions: user.submitted || null,
     }));
 }
 
