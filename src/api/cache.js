@@ -50,12 +50,10 @@ API.child("updates/items")
 // Since the needed data comes from different resolvers for different GraphQL types and fields,
 // it's easier to just run a local GraphQL query and let the magic happen.
 
-// TODO: "Show" feed
 // TODO: Tidy up, move into a separate file.
-// TODO: Figure out what the endpoint should be on production
 
 const CachingQuery = `{
-  topFeed:feed(feedName: "top", limit: 60) {
+  topFeed:feed(feedName: "top", limit: 40) {
     postCount
     posts {
       id
@@ -91,7 +89,7 @@ const CachingQuery = `{
     }
   }
   
-  newFeed: feed(feedName: "new", limit: 60) {
+  newFeed: feed(feedName: "new", limit: 30) {
     postCount
     posts {
       id
@@ -103,31 +101,10 @@ const CachingQuery = `{
       time
       author
       commentCount
-      comments { # 0
-        ...CommentFields
-        comments { # 1
-          ...CommentFields
-          comments { # 2
-            ...CommentFields
-            comments { # 3
-              ...CommentFields
-              comments { # 4
-                ...CommentFields
-                comments { # 5
-                  ...CommentFields
-                  comments { #6
-                    ...CommentFields
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
   
-  showFeed: feed(feedName: "show", limit: 60) {
+  showFeed: feed(feedName: "show", limit: 30) {
     postCount
     posts {
       id
@@ -139,27 +116,6 @@ const CachingQuery = `{
       time
       author
       commentCount
-      comments { # 0
-        ...CommentFields
-        comments { # 1
-          ...CommentFields
-          comments { # 2
-            ...CommentFields
-            comments { # 3
-              ...CommentFields
-              comments { # 4
-                ...CommentFields
-                comments { # 5
-                  ...CommentFields
-                  comments { #6
-                    ...CommentFields
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
     }
   }
 }
