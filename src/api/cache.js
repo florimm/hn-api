@@ -4,7 +4,6 @@ import fetch from './fetch';
 import { FEED_NAMES } from '../constants';
 import { request } from 'graphql-request'
 
-
 const cache = lru({
   max: 5000,
   maxAge: 1000 * 60 * 60
@@ -27,6 +26,7 @@ Object.keys(FEED_NAMES).forEach(feed => {
       })
 });
 
+
 // Invalidate and re-fetch updated items
 API.child("updates/items")
   .on('value', snapshot => {
@@ -37,13 +37,25 @@ API.child("updates/items")
 
         fetch(`item/${id}`)
           .then(_ => console.log(`Item with id ${id} updated, re-caching.`))
-          .catch(error => "Failed re-caching Item with id ${id}");
+          .catch(error => "Failed re-caching item with id ${id}");
       }
     });
   });
 
-// TODO: Need to invalidate users same way.
+// Invalidate and re-fetch updated users
+API.child("updates/profiles")
+  .on('value', snapshot => {
+    snapshot.val().forEach(id => {
+      if (cache && cache.has(`user/${id}`)) {
 
+        cache.del(`user/${id}`);
+
+        fetch(`user/${id}`)
+          .then(_ => console.log(`User with id ${id} updated, re-caching.`))
+          .catch(error => "Failed re-caching user with id ${id}");
+      }
+    });
+  });
 
 // Fetch & cache first two pages of all posts with comments on run
 //
