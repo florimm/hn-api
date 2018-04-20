@@ -1,13 +1,13 @@
 import fetch from './fetch';
-
+import orderBy from 'lodash/orderBy';
 
 function fetchPollOption(id) {
   console.log(`Fetching Poll option ${id}`);
-  
+
   return fetch(`item/${id}`)
     .then(pollOpt => {
       if (pollOpt.deleted) return null;
-      
+
       return ({
         text: pollOpt.text,
         voteCount: pollOpt.score,
@@ -27,9 +27,10 @@ function fetchPollOption(id) {
 function fetchPollOptions(idList) {
   return Promise.all(idList.map(fetchPollOption))
     .then(options =>
-      options.filter(option => {
-        return option !== null && option !== undefined;
-      })
+      orderBy(options, 'voteCount', 'desc')
+        .filter(option => {
+          return option !== null && option !== undefined;
+        })
     )
     .catch(error => console.log(`Failed fetching poll options ${idList}: ${error}`));
 }
