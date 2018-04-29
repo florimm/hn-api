@@ -58,7 +58,7 @@ const typeDefs = `
     text: String
     time: Int!
     author: String
-    commentIDs: [Int]
+    commentIDs: [ID]
     comments(skip: Int = 0, limit: Int): [Comment]
     parent: ID
     parentPostID: ID

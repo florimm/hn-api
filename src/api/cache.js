@@ -22,7 +22,7 @@ Object.keys(FEED_NAMES).forEach(feed => {
         console.log(`Updated cached IDs for "${feed}"`);
       },
       error => {
-        console.log(error);
+        console.log("Failed caching feed IDs: ", error);
       })
 });
 
@@ -37,7 +37,7 @@ API.child("updates/items")
 
         fetch(`item/${id}`)
           .then(_ => console.log(`Item with id ${id} updated, re-caching.`))
-          .catch(error => "Failed re-caching item with id ${id}");
+          .catch(error => console.log("Failed re-caching item with id ${id}: ", error));
       }
     });
   });
@@ -52,7 +52,7 @@ API.child("updates/profiles")
 
         fetch(`user/${id}`)
           .then(_ => console.log(`User with id ${id} updated, re-caching.`))
-          .catch(error => "Failed re-caching user with id ${id}");
+          .catch(error => console.log("Failed re-caching user with id ${id}: ", error));
       }
     });
   });
