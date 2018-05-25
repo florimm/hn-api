@@ -6,6 +6,10 @@
   "author": "Tigran Petrossian",
   "license": "MIT",
   "scripts": {
+    "prebuild:": "yarn build:clean",
+    "build:clean": "rimraf ./build",
+    "build": "webpack --config webpack.config.prod.js --progress",
+    "start:prod": "yarn build && NODE_ENV=production node build/graphql.server.js",
     "start": "nodemon --inspect ./src/server.js --exec babel-node"
   },
   "dependencies": {
@@ -17,6 +21,7 @@
     "@babel/preset-stage-2": "^7.0.0-beta.42",
     "@babel/register": "^7.0.0-beta.42",
     "apollo-server-express": "^1.3.4",
+    "babel-loader": "^8.0.0-beta.2",
     "body-parser": "^1.18.2",
     "casual": "^1.5.19",
     "compression": "^1.7.2",
@@ -29,6 +34,12 @@
     "graphql-tools": "^2.23.1",
     "lodash": "^4.17.5",
     "lru-cache": "^4.1.2",
-    "nodemon": "^1.17.2"
+    "nodemon": "^1.17.2",
+    "rimraf": "^2.6.2",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.4",
+    "webpack-dev-middleware": "^3.1.3",
+    "webpack-hot-server-middleware": "^0.5.0",
+    "webpack-node-externals": "^1.7.2"
   }
 }
