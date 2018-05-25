@@ -30,7 +30,7 @@ Object.keys(FEED_NAMES).forEach(feed => {
 // Invalidate and re-fetch updated items
 API.child("updates/items")
   .on('value', snapshot => {
-    snapshot.val().forEach(id => {
+    snapshot.val() && snapshot.val().forEach(id => {
       if (cache && cache.has(`item/${id}`)) {
 
         cache.del(`item/${id}`);
@@ -45,7 +45,7 @@ API.child("updates/items")
 // Invalidate and re-fetch updated users
 API.child("updates/profiles")
   .on('value', snapshot => {
-    snapshot.val().forEach(id => {
+    snapshot.val() && snapshot.val().forEach(id => {
       if (cache && cache.has(`user/${id}`)) {
 
         cache.del(`user/${id}`);
