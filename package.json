@@ -10,7 +10,7 @@
     "build:clean": "rimraf ./build",
     "build": "webpack --config webpack.config.prod.js --progress",
     "start:prod": "yarn build && NODE_ENV=production node build/graphql.server.js",
-    "start": "nodemon --inspect ./src/server.js --exec babel-node"
+    "start": "LOG=* nodemon --inspect ./src/server.js --exec babel-node"
   },
   "dependencies": {
     "@babel/cli": "^7.0.0-beta.42",
@@ -40,6 +40,7 @@
     "webpack-cli": "^2.1.4",
     "webpack-dev-middleware": "^3.1.3",
     "webpack-hot-server-middleware": "^0.5.0",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "winston": "^3.0.0-rc5"
   }
 }
