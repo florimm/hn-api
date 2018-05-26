@@ -44,12 +44,12 @@ export async function fetchComment(id, withPostInfo = false) {
 // The whole approach is embarassing, but there doesn't seem to be any other sane way to do this.
 
 function getParentPostId(comment) {
-  log.info('Retrieving parent post info for ', comment.id);
+  log.debug('Retrieving parent post info for ', comment.id);
 
   return fetch(`item/${comment.parent}`)
     .then(result => {
       if (result && result.type !== 'comment') {
-        log.info('parent Post ID: ', result.id);
+        log.debug('parent Post ID: ', result.id);
 
         return {
           postTitle: result.title,

@@ -17,7 +17,7 @@ const log = logger('app:fetchFeed');
  *  */
 
 function fetchFeed(name, page = 1, limit = ENTRIES_PER_PAGE) {
-  log.info(`Fetching feed ${name}`);
+  log.debug(`Fetching feed ${name}`);
 
   const skip = (page - 1) * limit;
 

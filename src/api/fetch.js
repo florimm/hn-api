@@ -14,14 +14,14 @@ const log = logger('app:fetch');
  * */
 function fetch(path) {
   if (cache && cache.has(path)) {
-    log.info(`Fetching ${path} from cache`);
+    log.debug(`Fetching ${path} from cache`);
     return Promise.resolve(cache.get(path));
   }
 
   return API.child(path)
     .once('value')
     .then(snapshot => {
-      log.info(`Fetching ${path} from Firebase`);
+      log.debug(`Fetching ${path} from Firebase`);
 
       if (cache) {
         cache.set(path, snapshot.val());

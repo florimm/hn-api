@@ -5,7 +5,7 @@ import logger from '../logger';
 const log = logger('app:fetchPollOptions');
 
 function fetchPollOption(id) {
-  log.info(`Fetching Poll option ${id}`);
+  log.debug(`Fetching Poll option ${id}`);
 
   return fetch(`item/${id}`)
     .then(pollOpt => {

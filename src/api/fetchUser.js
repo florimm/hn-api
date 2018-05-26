@@ -12,7 +12,7 @@ const log = logger('app:fetchUser');
  *  */
 
 export function fetchUser(id) {
-  log.info(`Fetching user ${id}`);
+  log.debug(`Fetching user ${id}`);
 
   return fetch(`user/${id}`)
     .then(user => {

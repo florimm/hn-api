@@ -1,7 +1,7 @@
 import winston, { format, createLogger, transports } from 'winston';
 const { combine, timestamp, label, printf } = format;
 
-const formatConsoleMessage = format.printf(info => {
+const formatConsoleMessage = printf(info => {
   const { timestamp, label, level, message } = info;
   return `${timestamp} ${level}: [${label}] ${message}`;
 });
@@ -22,6 +22,8 @@ const logger = createLogger({
 });
 
 if (process.env.NODE_ENV !== 'production') {
+  logger.level = 'debug';
+
   logger.add(new transports.Console({
     format: combine(
       format.colorize(),
@@ -32,7 +34,6 @@ if (process.env.NODE_ENV !== 'production') {
     ),
   }));
 }
-
 
 
 // Amend the logger with additional options for development mode (inspired by https://github.com/visionmedia/debug):
@@ -107,7 +108,7 @@ const labelEnabled = (label) => {
 
 export default (label) => {
   const log = (message, label, level) => {
-    if (!levelEnabled(level) || !labelEnabled(label)) {
+    if (process.env.NODE_ENV !== 'production' && (!levelEnabled(level) || !labelEnabled(label))) {
       return;
     }
 
@@ -123,3 +124,4 @@ export default (label) => {
     return acc;
   }, {});
 };
+
