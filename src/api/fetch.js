@@ -1,5 +1,8 @@
 import API from './api';
 import cache from './cache';
+import logger from '../logger';
+
+const log = logger('app:fetch');
 
 /**
  *
@@ -11,16 +14,14 @@ import cache from './cache';
  * */
 function fetch(path) {
   if (cache && cache.has(path)) {
-    console.log(`Fetching ${path} from cache`);
+    log.info(`Fetching ${path} from cache`);
     return Promise.resolve(cache.get(path));
   }
-
-  console.time(`Fetching ${path} from Firebase`);
 
   return API.child(path)
     .once('value')
     .then(snapshot => {
-      console.timeEnd(`Fetching ${path} from Firebase`);
+      log.info(`Fetching ${path} from Firebase`);
 
       if (cache) {
         cache.set(path, snapshot.val());
@@ -28,7 +29,7 @@ function fetch(path) {
 
       return snapshot.val();
     })
-    .catch(error => console.log(`Failed fetching ${path}: ${error}`));
+    .catch(error => log.error(`Failed fetching ${path}: ${error}`));
 }
 
 export default fetch;

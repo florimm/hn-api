@@ -1,5 +1,8 @@
 import fetch from './fetch';
 import fetchPost from './fetchPost'
+import logger from '../logger';
+
+const log = logger('app:fetchPosts');
 
 
 /**
@@ -15,7 +18,7 @@ function fetchPosts(idList) {
 
   return Promise.all(idList.map(fetchPost))
     .then(posts => posts.filter(post => post !== null && post !== undefined))
-    .catch(error => console.log(`Failed fetching ${idList}: ${error}`));
+    .catch(error => log.error(`Failed fetching ${idList}: ${error}`));
 }
 
 export default fetchPosts;

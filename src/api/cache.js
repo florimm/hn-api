@@ -3,6 +3,9 @@ import API from './api';
 import fetch from './fetch';
 import { FEED_NAMES } from '../constants';
 import { request } from 'graphql-request'
+import logger from '../logger';
+
+const log = logger('app:cache');
 
 const cache = lru({
   max: 5000,
@@ -19,10 +22,10 @@ Object.keys(FEED_NAMES).forEach(feed => {
     .on('value',
       snapshot => {
         cachedFeedIDs[feed] = snapshot.val();
-        console.log(`Updated cached IDs for "${feed}"`);
+        log.info(`Updated cached IDs for "${feed}"`);
       },
       error => {
-        console.log("Failed caching feed IDs: ", error);
+        log.info("Failed caching feed IDs: ", error);
       })
 });
 
@@ -36,8 +39,8 @@ API.child("updates/items")
         cache.del(`item/${id}`);
 
         fetch(`item/${id}`)
-          .then(_ => console.log(`Item with id ${id} updated, re-caching.`))
-          .catch(error => console.log("Failed re-caching item with id ${id}: ", error));
+          .then(_ => log.info(`Item with id ${id} updated, re-caching.`))
+          .catch(error => log.error("Failed re-caching item with id ${id}: ", error));
       }
     });
   });
@@ -51,8 +54,8 @@ API.child("updates/profiles")
         cache.del(`user/${id}`);
 
         fetch(`user/${id}`)
-          .then(_ => console.log(`User with id ${id} updated, re-caching.`))
-          .catch(error => console.log("Failed re-caching user with id ${id}: ", error));
+          .then(_ => log.info(`User with id ${id} updated, re-caching.`))
+          .catch(error => log.error("Failed re-caching user with id ${id}: ", error));
       }
     });
   });
@@ -143,8 +146,8 @@ fragment CommentFields on Comment {
 
 function warmCache() {
   request('http://localhost:4000/graphql', CachingQuery)
-    .then(data => console.log("Successfully updated feed cache."))
-    .catch(error => console.log(`Failed updating feed cache: ${error}`));
+    .then(data => log.info("Successfully updated feed cache."))
+    .catch(error => log.error(`Failed updating feed cache: ${error}`));
 }
 
 warmCache();

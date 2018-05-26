@@ -1,4 +1,7 @@
 import fetch from './fetch';
+import logger from '../logger';
+
+const log = logger('app:fetchPost');
 
 /**
  * Fetch a single post
@@ -31,7 +34,7 @@ export function fetchPost(id) {
         commentIDs: post.kids || null,
       });
     })
-    .catch(error => console.log(`Failed fetching post ${id}`))
+    .catch(error => log.error(`Failed fetching post ${id}`))
 }
 
 export default fetchPost;

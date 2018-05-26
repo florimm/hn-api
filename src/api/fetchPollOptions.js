@@ -1,8 +1,11 @@
 import fetch from './fetch';
 import orderBy from 'lodash/orderBy';
+import logger from '../logger';
+
+const log = logger('app:fetchPollOptions');
 
 function fetchPollOption(id) {
-  console.log(`Fetching Poll option ${id}`);
+  log.info(`Fetching Poll option ${id}`);
 
   return fetch(`item/${id}`)
     .then(pollOpt => {
@@ -32,7 +35,7 @@ function fetchPollOptions(idList) {
           return option !== null && option !== undefined;
         })
     )
-    .catch(error => console.log(`Failed fetching poll options ${idList}: ${error}`));
+    .catch(error => log.error(`Failed fetching poll options ${idList}: ${error}`));
 }
 
 export default fetchPollOptions;

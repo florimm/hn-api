@@ -1,5 +1,8 @@
 import fetch from './fetch';
 import API from './api';
+import logger from '../logger';
+
+const log = logger('app:fetchComment');
 
 /**
  * Fetch a single comment
@@ -41,12 +44,12 @@ export async function fetchComment(id, withPostInfo = false) {
 // The whole approach is embarassing, but there doesn't seem to be any other sane way to do this.
 
 function getParentPostId(comment) {
-  console.log('Retrieving parent post info for ', comment.id);
+  log.info('Retrieving parent post info for ', comment.id);
 
   return fetch(`item/${comment.parent}`)
     .then(result => {
       if (result && result.type !== 'comment') {
-        console.log('parent Post ID: ', result.id);
+        log.info('parent Post ID: ', result.id);
 
         return {
           postTitle: result.title,

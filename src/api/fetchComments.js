@@ -1,5 +1,8 @@
 import fetch from './fetch';
 import fetchComment from './fetchComment';
+import logger from '../logger';
+
+const log = logger('app:fetchComments');
 
 /**
  * Fetch a list of comments
@@ -27,7 +30,7 @@ export function fetchComments(idList, skip, limit) {
       comments.filter(comment =>
         comment !== null && comment !== undefined)
     )
-    .catch(error => console.log(`Failed fetching ${idList}: ${error}`));
+    .catch(error => log.error(`Failed fetching ${idList}: ${error}`));
 }
 
 export default fetchComments;

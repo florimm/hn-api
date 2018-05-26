@@ -2,6 +2,9 @@ import fetch from './fetch';
 import { ENTRIES_PER_PAGE } from '../constants';
 import fetchPosts from './fetchPosts';
 import fetchFeedIDs from './fetchFeedIDs';
+import logger from '../logger';
+
+const log = logger('app:fetchFeed');
 
 /**
  * Fetch a feed of given name and page: top 1st page, news 2nd page, etc.
@@ -14,15 +17,15 @@ import fetchFeedIDs from './fetchFeedIDs';
  *  */
 
 function fetchFeed(name, page = 1, limit = ENTRIES_PER_PAGE) {
-  console.log(`Fetching feed ${name}`);
-  
+  log.info(`Fetching feed ${name}`);
+
   const skip = (page - 1) * limit;
-  
+
   return fetchFeedIDs(name)
     .then(idList => idList.slice(skip, skip + limit))
     .then(fetchPosts)
     .then(posts => Promise.all(posts))
-    .catch(error => console.log(`Failed fetching feed ${name}: ${error}`));
+    .catch(error => log.error(`Failed fetching feed ${name}: ${error}`));
 }
 
 export default fetchFeed;

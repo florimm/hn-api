@@ -1,4 +1,7 @@
 import fetch from './fetch';
+import logger from '../logger';
+
+const log = logger('app:fetchUser');
 
 /**
  * Fetch a single user
@@ -9,7 +12,7 @@ import fetch from './fetch';
  *  */
 
 export function fetchUser(id) {
-  console.log(`Fetching user ${id}`);
+  log.info(`Fetching user ${id}`);
 
   return fetch(`user/${id}`)
     .then(user => {
@@ -25,7 +28,8 @@ export function fetchUser(id) {
         karma: user.karma || null,
         submissions: user.submitted || null,
       });
-    });
+    })
+    .catch(error => log.error(`Failed fetching user ${id}`))
 }
 
 export default fetchUser;
