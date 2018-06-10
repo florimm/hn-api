@@ -6,6 +6,7 @@ import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
 import schema from './data/schema';
 
 const app = express();
+const isProduction = process.env.NODE_ENV === 'production';
 
 app.use(compression());
 
@@ -22,14 +23,18 @@ app.use(
   graphqlExpress({ schema })
 );
 
-app.use(
-  '/graphiql',
-  graphiqlExpress({ endpointURL: '/graphql' })
-);
-
+if (isProduction) {
+  app.use(
+    '/graphiql',
+    graphiqlExpress({ endpointURL: '/graphql' })
+  );
+}
 
 app.listen(4000, () => {
-  console.log('Go to http://localhost:4000/graphiql to run queries!');
+  console.log(isProduction
+    ? 'API running at :4000'
+    : 'Go to http://localhost:4000/graphiql to run queries!'
+  );
 });
 
 // TODO: Need authentication
