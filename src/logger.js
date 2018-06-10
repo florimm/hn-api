@@ -12,7 +12,7 @@ const logger = createLogger({
     format.timestamp({
       format: 'YYYY-MM-DD HH:MM:SS'
     }),
-    winston.format.json(),
+    format.json(),
   ),
   exitOnError: false,
   transports: [

@@ -9,7 +9,8 @@
     "prebuild:": "yarn build:clean",
     "build:clean": "rimraf ./build",
     "build": "webpack --config webpack.config.prod.js --progress",
-    "start:prod": "yarn build && NODE_ENV=production node build/graphql.server.js",
+    "start:prod": "NODE_ENV=production node build/graphql.server.js",
+    "buildstart:prod": "yarn build && yarn start:prod",
     "start": "LOG=* nodemon --inspect ./src/server.js --exec babel-node"
   },
   "dependencies": {
