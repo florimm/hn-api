@@ -1,6 +1,4 @@
 import express from 'express';
-import https from 'https';
-import fs from 'fs';
 import cors from 'cors';
 import compression from 'compression';
 import bodyParser from 'body-parser';
@@ -14,7 +12,7 @@ app.use(compression());
 
 const corsOptions = {
   // Cache OPTIONS request, so it doesn't block the main request on slow connections.
-  maxAge: 86400, // TODO: Doesn't seem to work. Check.
+  maxAge: 86400 // TODO: Doesn't seem to work. Check.
 };
 
 app.use(cors(corsOptions));
@@ -22,30 +20,22 @@ app.use(cors(corsOptions));
 app.use(
   '/graphql',
   bodyParser.json(),
-  graphqlExpress({ schema }),
+  graphqlExpress({ schema })
 );
 
-if (isProduction) {
-  https.createServer({
-      cert: fs.readFileSync('/etc/letsencrypt/live/hn.tigran.io/fullchain.pem'),
-      key: fs.readFileSync('/etc/letsencrypt/live/hn.tigran.io/privkey.pem'),
-    },
-    app).listen(4000);
-}
-
-else if (!isProduction) {
+if (!isProduction) {
   app.use(
     '/graphiql',
-    graphiqlExpress({ endpointURL: '/graphql' }),
+    graphiqlExpress({ endpointURL: '/graphql' })
   );
-
-  app.listen(4000, () => {
-    console.log(isProduction
-      ? 'API running at :4000'
-      : 'Go to http://localhost:4000/graphiql to run queries!',
-    );
-  });
 }
+
+app.listen(4000, () => {
+  console.log(isProduction
+    ? 'API running at :4000'
+    : 'Go to http://localhost:4000/graphiql to run queries!'
+  );
+});
 
 // TODO: Need authentication
 
