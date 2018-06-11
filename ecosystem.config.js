@@ -2,7 +2,7 @@ module.exports = {
   apps : [
     {
       name      : 'HNAPI',
-      script    : 'start.prod.js',
+      script    : 'build/graphql.server.js',
       env: {
         NODE_ENV: 'production'
       }
