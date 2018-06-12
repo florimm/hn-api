@@ -25,7 +25,7 @@ Object.keys(FEED_NAMES).forEach(feed => {
         log.info(`Updated cached IDs for "${feed}"`);
       },
       error => {
-        log.info("Failed caching feed IDs: ", error);
+        log.error("Failed caching feed IDs: ", error);
       })
 });
 
@@ -39,7 +39,7 @@ API.child("updates/items")
         cache.del(`item/${id}`);
 
         fetch(`item/${id}`)
-          .then(_ => log.info(`Item with id ${id} updated, re-caching.`))
+          .then(_ => log.debug(`Item with id ${id} updated, re-caching.`))
           .catch(error => log.error("Failed re-caching item with id ${id}: ", error));
       }
     });
@@ -54,7 +54,7 @@ API.child("updates/profiles")
         cache.del(`user/${id}`);
 
         fetch(`user/${id}`)
-          .then(_ => log.info(`User with id ${id} updated, re-caching.`))
+          .then(_ => log.debug(`User with id ${id} updated, re-caching.`))
           .catch(error => log.error("Failed re-caching user with id ${id}: ", error));
       }
     });
