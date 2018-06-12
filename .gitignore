@@ -7,6 +7,10 @@ node_modules
 # production
 /build
 
+# logs
+
+/logs
+
 # misc
 .env.local
 .env.development.local
