@@ -2,14 +2,12 @@ import { makeExecutableSchema, addMockFunctionsToSchema } from 'graphql-tools';
 import mocks from './mocks';
 import resolvers from './resolvers';
 
-// TODO: Document the schema
-
 // language=GraphQL Schema
 const typeDefs = `
   type Query {
-    # Single feed of posts of given type (top, new, etc.). Limited to 30 posts per page by default.
+    # Feed of posts of given type (top, new, etc.). Limited to 30 posts per page by default.
     feed(
-      # Name of the feed (top, new, show, ask, etc.)
+      # Name of the feed (top, new, show, ask, jobs, or best)
       feedName: String!,
       
       # Current page of the feed to display
@@ -19,16 +17,16 @@ const typeDefs = `
       limit: Int = 30
     ): Feed!
     
-    # Single post
+    # Fetch a post by ID
     post(id: ID!): Post
     
-    # Single comment
+    # Fetch a comment by ID
     comment(id: ID!): Comment
     
-    # Multiple comments by ID
+    # Fetch multiple comments by IDs
     comments(commentIDs: [ID!], skip: Int = 0, limit: Int): [Comment]!
     
-    # Single user
+    # Fetch a user by username
     user(username: String!): User
   }
   
@@ -67,16 +65,16 @@ const typeDefs = `
   }
   
   type User {
-    username: String
+    username: String!
     createdAt: Int!
     karma: Int
     about: String
-    submissions: [ID] #[?]
+    submissions: [ID] 
   }
   
   type Poll {
     totalVotes: Int!
-    options: [PollOption] #!
+    options: [PollOption]! 
   }
   
   type PollOption {

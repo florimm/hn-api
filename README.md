@@ -1,6 +1,6 @@
 # Hacker News GraphQL
 
-GraphQL Wrapper over [Hacker News Firebase API](https://github.com/HackerNews/API), used in [Hacker News Redesigned](https://github.com/tigranpetrossian/hacker-news-redesigned) client.
+GraphQL wrapper over [Hacker News Firebase API](https://github.com/HackerNews/API), used in [Hacker News Redesigned](https://github.com/tigranpetrossian/hacker-news-redesigned) client.
 
 The project was implemented to provide better performance over the HN Firebase API by adding in-memory LRU cache, eliminate the need of N+1 requests on the client.
 
@@ -11,7 +11,7 @@ The project was implemented to provide better performance over the HN Firebase A
 * [lru-cache](https://github.com/isaacs/node-lru-cache)
 * [winston logger](https://github.com/winstonjs/winston)
 
-# Running locally
+## Running locally
 
 1. Clone the repository: `git clone git@github.com:tigranpetrossian/hn-api.git`
 2. Run 'yarn install'
@@ -21,3 +21,6 @@ you can also try out available queries with [GraphiQL] at [http://localhost:4000
 
 `yarn build` and `yarn start:prod` are also available for bundling the project and running on production.
 
+## API Reference:
+
+Please refer to the docs section of the GraphiQL browser (described above) for exploring the API options.
